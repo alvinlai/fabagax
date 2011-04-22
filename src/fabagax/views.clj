@@ -1,6 +1,8 @@
 (ns fabagax.views
+  (:require [appengine-magic.services.user :as u])
   (:use hiccup.core
-        fabagax.helpers))
+        fabagax.helpers
+        ))
 
 (defn layout
   [body]
@@ -11,6 +13,16 @@
    [:body
     [:div {:id "header"}
      [:h1 "Fabagax"]
+     (if (u/user-logged-in?)
+       (do
+         [:p
+          "Logged in as "
+          (u/current-user)
+          (if (u/user-admin?)
+           " (Admin)")
+          ". "
+          (link-to (u/logout-url) "Logout")])
+       [:p (link-to (u/login-url) "Login")])
      [:p "My journey learning Clojure, Compojure, Emacs and Swank for web development on Google App Engine"]]
     [:div {:id "content"} body]
     [:div {:id "footer"} "All rights reserved Fabagax, Alvin Lai 2011"]]

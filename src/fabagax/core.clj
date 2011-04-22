@@ -16,7 +16,8 @@
 ; Comment this out before deploying to GAE
 ; This is for restarting the webserver real quick with a C-c C-L or
 ; C-c C-k
-;(ae/serve fabagax-app) 
+;(ae/start fabagax-app)
+
 
 
 
